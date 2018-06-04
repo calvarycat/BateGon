@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ded564e61fca59b4091565be890a3d14
+timeCreated: 1499330214
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 64
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: SFU DIN
+  fontNames:
+  - SFU DIN
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
