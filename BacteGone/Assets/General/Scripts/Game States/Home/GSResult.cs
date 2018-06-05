@@ -51,7 +51,7 @@ public class GSResult : GSTemplate
         StopTweenScale();
         StopTweenValue();
         KinectInputModule.Instance.AllowUpdate = false;
-        HappyValueText.text = "00%";
+        HappyValueText.text = "0";
 
         _beginWait = false;
         _currentWait = WaitTime;
@@ -115,12 +115,14 @@ public class GSResult : GSTemplate
     private void ShowHappyValue()
     {
         _happyValueDescr = LeanTween.value(HappyValueText.gameObject,
-            OnHappyValueTween, 0, HappyValue, HappyValue / 50f).setOnComplete(OnShowHappyValueFinish);
+            OnHappyValueTween, 0, HappyValue, HappyValue/50f).setOnComplete(OnShowHappyValueFinish);
+      
     }
 
     private void OnHappyValueTween(float value)
     {
-        HappyValueText.text = string.Format("{0:00}%", Mathf.RoundToInt(value));
+        int vl = (int)value;
+        HappyValueText.text = vl.ToString();
     }
 
     private void OnShowHappyValueFinish()

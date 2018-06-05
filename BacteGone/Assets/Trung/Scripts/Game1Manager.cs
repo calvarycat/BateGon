@@ -42,6 +42,7 @@ public class Game1Manager : MonoBehaviour
     bool isRunGame = false;
     public void Init(float _timeplay = 300)
     {
+        Debug.Log("No vo co 1 lan init");
         numberofLive = 4;
         isRunGame = true;
         isGo = false;
@@ -72,27 +73,27 @@ public class Game1Manager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!isRunGame)
-        {
-            return;
-        }
-        totalTimePlay += Time.deltaTime;
-        timePlay -= Time.deltaTime;
-        if (!isCall)
-            GSPlaying.Instance.ChangeTime(timePlay);
-        if (timePlay <= 0)
-        {
-            if (!isCall)
-            {
-                isCall = true;
-                AudioManager.StopMusic();
-            }
-        }
-        if (timePlay <= 3 && !isGo)
-        {
-            isGo = true;
-            GSPlaying.Instance.PlayCountDown(GoToNextLevel, 2, "Finish");
-        }
+        //if (!isRunGame)
+        //{
+        //    return;
+        //}
+        //totalTimePlay += Time.deltaTime;
+        //timePlay -= Time.deltaTime;
+        //if (!isCall)
+        //    GSPlaying.Instance.ChangeTime(timePlay);
+        //if (timePlay <= 0)
+        //{
+        //    if (!isCall)
+        //    {
+        //        isCall = true;
+        //        AudioManager.StopMusic();
+        //    }
+        //}
+        //if (timePlay <= 3 && !isGo)
+        //{
+        //    isGo = true;
+        //    GSPlaying.Instance.PlayCountDown(GoToNextLevel, 2, "Finish");
+        //}
     }
     bool isGo = false;
     public bool isCall = true;
@@ -110,7 +111,7 @@ public class Game1Manager : MonoBehaviour
 
         if (_symtomList == null || _symtomList.Count == 0)
         {
-            _symtomList = new List<int> { 1, 2, 3, 4 };
+            _symtomList = new List<int> { 0,1, 2, 3, 4 };
         }
 
         int index = Random.Range(0, _symtomList.Count);
@@ -131,41 +132,12 @@ public class Game1Manager : MonoBehaviour
       
         symptom[symptomID].gameObject.SetActive(true);
     }
-    private IEnumerator ShowSymptom1()
-    {
-        if (isCall)
-        {
-            GSPlaying.Instance.ShowSymptom(0);
-            yield break;
-        }
-
-        if (_symtomList == null || _symtomList.Count == 0)
-        {
-
-            _symtomList = new List<int> { 1, 2, 3, 4 };
-
-        }
-
-        int index = Random.Range(0, _symtomList.Count);
-
-
-        int symptomID = _symtomList[index];
-        _symtomList.RemoveAt(index);
-
-        _oldSymptomid = symptomID;
-
-        AudioManager.PlaySound(clipChooseNextSymtom);
-        currentDisease = symptomID;
-        int mapEnum = currentDisease + 1;
-        MedicinName e = (MedicinName)mapEnum;
-        GSPlaying.Instance.ShowSymptom(e);
-        symptom[symptomID].gameObject.SetActive(true);
-    }
+    
 
     private IEnumerator DisableSymptom(int symptomID, float ftime)
     {
         Debug.Log("Ko zo disable");
-        GSPlaying.Instance.ShowSymptom(MedicinName.None);
+      
         yield return new WaitForSeconds(ftime);
         symptom[symptomID].gameObject.SetActive(false);
         yield return ShowSymptom();
@@ -175,7 +147,7 @@ public class Game1Manager : MonoBehaviour
 
     public void CatchObjectID(int id)
     {
-        Debug.Log(id + "/" + currentDisease);
+     //   Debug.Log(id + "/" + currentDisease);
         if (id == currentDisease)
         {
 
@@ -189,27 +161,26 @@ public class Game1Manager : MonoBehaviour
             {
                 gs.OnChangeScore(4);
             }
-            else
-            {
-                Debug.Log("Change score chua init ne");
-            }
+         
 
         }
         else
         {
             numberofLive--;
             ResetLives(numberofLive);
-            GSPlaying.Instance.ShowScorePopup(positionPopup.localPosition, -4);
+           GSPlaying.Instance.ShowScorePopup(positionPopup.localPosition, -4);
             AudioManager.PlaySound(clipslashwrong);
             GSPlaying.Instance.PlayScreenEfect(false, 2);
         }
-        //if (score >= 40 && !isCall)
-        //{
+        if ((score >= 100 || numberofLive==0)  && !isCall )
+        {
 
-        //    isCall = true;
-        //    AudioManager.StopMusic();
-        //    PlayCountDouwn();
-        //}
+            isCall = true;
+            AudioManager.StopMusic();
+            // PlayCountDouwn();
+            GoToNextLevel();
+            // đã thua
+        }
     }
 
     private float timeextra;

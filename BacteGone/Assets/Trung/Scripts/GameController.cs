@@ -75,8 +75,7 @@ public class GameController : MonoBehaviour
         score = 0;
         DeleteAfterplay();
         game1.gameObject.SetActive(true);
-        game1.Init(60);
-       // Intestinalsystem.SetActive(true);
+        game1.Init(60);     
         
     }
 

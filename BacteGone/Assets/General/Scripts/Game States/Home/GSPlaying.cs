@@ -76,11 +76,11 @@ public class GSPlaying : GSTemplate
         base.OnResume();
 
         ResetScreenEffect();
-       // ResetTutorial();
-      //  ResetScore();
+      ResetTutorial();
+       ResetScore();
         ResetScorePopup();
-       // ResetTime();
-      //  TargetSymptomPanel.Reset();
+       ResetTime();
+    
        // ResetHandHelper();
         ResetHandViewer();
         ResetHandTrail();
@@ -88,8 +88,10 @@ public class GSPlaying : GSTemplate
 
         //ShowTutorial();
         OnShowTutorialResponse();
+        isFinishCould = false;
     }
 
+   public bool isFinishCould = false;
     #region ScreenEffect
 
     private void ResetScreenEffect()
@@ -146,7 +148,7 @@ public class GSPlaying : GSTemplate
         KinectInputModule.Instance.AllowUpdate = false;
         GameObject countObject = Utils.Spawn(CountDownPrefab, CountDownRoot);
         CountDownPanel countDown = countObject.GetComponent<CountDownPanel>();      
-        countDown.Init(OnCountdownResponse, 1,"message",false);
+        countDown.Init(OnCountdownResponse, 1,"",false);
         AudioManager.PlaySound(CounGo);
     }
 
@@ -154,6 +156,7 @@ public class GSPlaying : GSTemplate
     {
         if (OnTutorialFinish != null)
             OnTutorialFinish();
+        isFinishCould = true;
     }
 
     public void PlayCountDown(Action callback = null, int round = 0, string message = "",bool isShowSound=true)

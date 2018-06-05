@@ -15,7 +15,7 @@ public class CountDownPanel : MonoBehaviour
     public int CountFrom = 3;
     public AudioClip CountdownClip;
     public AudioClip GoClip;
-  
+
 
     private Action _callback;
     private int _round;
@@ -37,9 +37,8 @@ public class CountDownPanel : MonoBehaviour
         }
         else
         {
-            TitleTransform.gameObject.SetActive(true);
+            TitleTransform.gameObject.SetActive(false);
             TitleValue.text = string.Format("{0}", _round);
-
             TitleCircle.color = Color.white;
             _titleCircleDescr = LeanTween.color(TitleCircle.rectTransform, Color.red, 1f)
                 .setLoopType(LeanTweenType.linear).setLoopCount(-1);
@@ -60,8 +59,8 @@ public class CountDownPanel : MonoBehaviour
             _currentNumber--;
             TargetAnimator.ResetTrigger("Idle");
             TargetAnimator.SetTrigger("Play");
-            if(isSound)
-            AudioManager.PlaySound(CountdownClip);
+            if (isSound)
+                AudioManager.PlaySound(CountdownClip);
         }
         else if (_currentNumber == 0)
         {

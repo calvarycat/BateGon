@@ -31,12 +31,13 @@ public class ScorePopup : MonoBehaviour
 
         if (score >= 0)
         {
-            TargetText.text = string.Format("+{0:00}", score);
+            TargetText.text = "Perfect "+string.Format("+{0:00}", score);
             TargetGradient.EffectGradient = RightGradient;
         }
         else
         {
-            TargetText.text = string.Format("{0:00}", score);
+            // TargetText.text ="Opp "+ string.Format("{0:00}", score);
+            TargetText.text = "Opp!";
             TargetGradient.EffectGradient = WrongGradient;
         }
 

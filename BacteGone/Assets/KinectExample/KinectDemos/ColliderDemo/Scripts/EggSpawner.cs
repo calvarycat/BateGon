@@ -21,20 +21,24 @@ public class EggSpawner : MonoBehaviour
     {
         speed = 1.5f;
         countTimeChange = 10;
+        spawnRate = 1f;
     }
     void Update()
     {
+        if (!GSPlaying.Instance.isFinishCould)
+            return;
         countTimeChange -= Time.deltaTime;
         if (countTimeChange <= 0)
         {
             speed = speed + .5f;
             countTimeChange = 10;
-            if (speed > 4)
+            if (speed > 6)
             {
-                speed = 4;
+                speed = 6;
             }
+            spawnRate -= .1f;
         }
-        //  Debug.Log(nextEggTime + "ti" + Time.time);
+       
         if (game1Manager.isCall)
             return;
         if (nextEggTime < Time.time)
@@ -42,8 +46,6 @@ public class EggSpawner : MonoBehaviour
             SpawnEgg();
             float randomtime = Random.Range(spawnRate - .2f, spawnRate + .2f);
             nextEggTime = Time.time + randomtime;
-
-            //spawnRate = Mathf.Clamp(randomtime, 0.3f, 99f);
             d++;
             if (d > 3)
             {
@@ -53,6 +55,11 @@ public class EggSpawner : MonoBehaviour
 
         }
 
+    }
+    public GameObject special;
+    public void InvokeSpecial()
+    {
+       
     }
 
 
@@ -79,59 +86,35 @@ public class EggSpawner : MonoBehaviour
             }
             oldPos = posDrop;
             float addXPos = positionDrop[posDrop].localPosition.x;
-
             Vector3 spawnPos = new Vector3(addXPos, 5f, posUser.z);
             Transform eggTransform = Instantiate(eggPrefab, spawnPos, Quaternion.identity) as Transform;
-            int a = Random.Range(1, 4);
-            eggTransform.GetComponent<MedicinTrigger>().Init(game1Manager.currentDisease, speed);
-            //while (CheckListCurrent(a) || a == 6)
-            //{
-            //    a = Random.Range(1, 4);
-            //}
-
-            //if (dropMainMedicin)
-            //{
-            //    dropMainMedicin = false;
-            //    if (!CheckListCurrent(game1Manager.currentDisease))
-            //    {
-            //        eggTransform.GetComponent<MedicinTrigger>().Init(game1Manager.currentDisease, speed);
-            //    }
-
-            //    else
-            //    {
-            //        eggTransform.GetComponent<MedicinTrigger>().Init(a, speed);
-
-            //    }
-            //}
-            //else
-            //{
-            //    eggTransform.GetComponent<MedicinTrigger>().Init(a, speed);
-
-            //}
+            int a = Random.Range(0, 5);
+          
+            if(!CheckListCurrent())
+            {
+                a = game1Manager.currentDisease;
+            }
+            eggTransform.GetComponent<MedicinTrigger>().Init(a, speed);         
             eggTransform.parent = transform;
         }
     }
+   
     public int oldObject = 0;
-    bool CheckListCurrent(int id)
+    bool CheckListCurrent()
     {
-        string t = " a ";
+       
         GameObject[] obj = GameObject.FindGameObjectsWithTag("MedicineGameTag");
         if (obj == null)
             return false;
         foreach (GameObject ob in obj)
         {
-
-            MedicinTrigger md = ob.GetComponent<MedicinTrigger>();
-           
-            if (md != null && md.medicinID == id)
+            MedicinTrigger md = ob.GetComponent<MedicinTrigger>();           
+            if (md != null && md.medicinID == game1Manager.currentDisease)
             {
-
                 return true;
             }
-
-
         }
         return (false);
     }
-
+   
 }

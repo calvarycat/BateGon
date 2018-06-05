@@ -18,6 +18,7 @@ public class MedicinTrigger : MonoBehaviour
 
     public void Init(int id, float _speed = 1.5f)
     {
+        Debug.Log(id);
         medicinID = id;      
         speed = _speed;
         ProcessImageMedicin(id);    
@@ -25,14 +26,14 @@ public class MedicinTrigger : MonoBehaviour
 
     public void ProcessImageMedicin(int id)
     {
+        Debug.Log(id);
         int numimg = Random.Range(0, ControlImage.instance.listImage[id].spriteImage.Count);
         spriteRender.sprite = ControlImage.instance.listImage[id].spriteImage[numimg];
        
         boxCollider = gameObject.GetComponent<BoxCollider>();
         boxCollider.center = spriteRender.sprite.bounds.center;
         boxCollider.size = new Vector3(spriteRender.sprite.bounds.size.x,
-            spriteRender.sprite.bounds.size.y,
-            1);
+            spriteRender.sprite.bounds.size.y,1);
     }
 
   
