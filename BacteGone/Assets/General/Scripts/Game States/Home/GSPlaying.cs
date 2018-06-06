@@ -362,44 +362,7 @@ public class GSPlaying : GSTemplate
 
     private void UpdateHandTrail()
     {
-        //if (!_isShowHandTrail)
-        //{
-        //    return;
-        //}
-
-        //long userId = KinectManager.Instance.GetUserIdByIndex(0);
-
-        //KinectInterop.HandState leftHandState = KinectManager.Instance.GetLeftHandState(userId);
-        //if (leftHandState != KinectInterop.HandState.NotTracked)
-        //{
-        //    Vector3 handPosition = KinectManager.Instance.GetJointPosColorOverlay(userId,
-        //        (int)KinectInterop.JointType.HandLeft, Camera.main, KinectInputModule.Instance.TargetCanvas.pixelRect);
-
-        //    if (handPosition != Vector3.zero)
-        //    {
-        //        Vector3 screenPosition = Camera.main.WorldToScreenPoint(handPosition);
-        //        Vector3 canvasPosition = Utility.ConvertScreenPositionToCanvasPosition(
-        //            KinectInputModule.Instance.TargetCanvas,
-        //            screenPosition);
-        //        _leftTrailRectTransform.anchoredPosition = canvasPosition;
-        //    }
-        //}
-
-        //KinectInterop.HandState rightHandState = KinectManager.Instance.GetRightHandState(userId);
-        //if (rightHandState != KinectInterop.HandState.NotTracked)
-        //{
-        //    Vector3 handPosition = KinectManager.Instance.GetJointPosColorOverlay(userId,
-        //        (int)KinectInterop.JointType.HandRight, Camera.main, KinectInputModule.Instance.TargetCanvas.pixelRect);
-
-        //    if (handPosition != Vector3.zero)
-        //    {
-        //        Vector3 screenPosition = Camera.main.WorldToScreenPoint(handPosition);
-        //        Vector3 canvasPosition = Utility.ConvertScreenPositionToCanvasPosition(
-        //            KinectInputModule.Instance.TargetCanvas,
-        //            screenPosition);
-        //        _rightTrailRectTransform.anchoredPosition = canvasPosition;
-        //    }
-        //}
+       
     }
 
     #endregion
@@ -451,11 +414,6 @@ public class GSPlaying : GSTemplate
 
     #endregion
 
-    //private void Update()
-    //{
-    //    UpdateHandTrail();
-    //    CheckReset();
-    //}
 
     private void CheckReset()
     {

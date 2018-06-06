@@ -9,7 +9,7 @@ public class CountDownPanel : MonoBehaviour
     public Transform TitleTransform;
     public Text TitleValue;
     public RawImage TitleCircle;
-    public Text TargetText;
+   // public Text TargetText;
     public Text MessageText;
     public Animator TargetAnimator;
     public int CountFrom = 3;
@@ -24,8 +24,11 @@ public class CountDownPanel : MonoBehaviour
     private LTDescr _titleCircleDescr;
     bool isSound;
     public TexturedNumber CountDownTextImage;
+    public GameObject go;
     public void Init(Action callback = null, int round = 0, string message = "", bool isShowSound = true)
     {
+        CountDownTextImage.gameObject.SetActive(true);
+        go.gameObject.SetActive(false);
         isSound = isShowSound;
         _callback = callback;
         _round = round;
@@ -56,7 +59,8 @@ public class CountDownPanel : MonoBehaviour
 
         if (_currentNumber > 0)
         {
-            TargetText.text = _currentNumber.ToString();
+           // TargetText.text = _currentNumber.ToString();
+            CountDownTextImage.Value= _currentNumber.ToString();
             _currentNumber--;
             TargetAnimator.ResetTrigger("Idle");
             TargetAnimator.SetTrigger("Play");
@@ -65,7 +69,9 @@ public class CountDownPanel : MonoBehaviour
         }
         else if (_currentNumber == 0)
         {
-            TargetText.text = Localization.Get("Go");
+            //  TargetText.text = Localization.Get("Go");
+            CountDownTextImage.gameObject.SetActive(false);
+            go.gameObject.SetActive(true);
             _currentNumber--;
             TargetAnimator.ResetTrigger("Idle");
             TargetAnimator.SetTrigger("Play");
@@ -76,9 +82,10 @@ public class CountDownPanel : MonoBehaviour
         {
             if (!string.IsNullOrEmpty(_message))
             {
-                TargetText.gameObject.SetActive(false);
-                MessageText.gameObject.SetActive(true);
-                MessageText.text = _message;
+              
+                go.gameObject.SetActive(true);
+               // MessageText.gameObject.SetActive(true);
+              //  MessageText.text = _message;
 
                 if (_titleCircleDescr != null)
                 {

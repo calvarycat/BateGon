@@ -80,6 +80,7 @@ public class GSHome : GSTemplate
 
     public void OnStartButtonClick()
     {
+        Debug.Log("go to start");
         KinectInputModule.Instance.AllowUpdate = false;
         HidePanel();
         AudioManager.PlaySound(ButtonClip);

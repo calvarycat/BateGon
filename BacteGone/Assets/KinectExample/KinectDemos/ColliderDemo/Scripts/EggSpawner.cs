@@ -33,12 +33,18 @@ public class EggSpawner : MonoBehaviour
         if (countTimeChange <= 0)
         {
             speed = speed + .5f;
-            countTimeChange = 10;
+            countTimeChange = 15;
             if (speed > 6)
             {
                 speed = 6;
             }
             spawnRate -= .1f;
+            if(spawnRate<=0)
+            {
+                spawnRate = 0;
+
+            }
+          
         }
        
         if (game1Manager.isCall)
@@ -46,7 +52,7 @@ public class EggSpawner : MonoBehaviour
 
         timeSpawnSpecial += Time.deltaTime;
 
-        if(timeSpawnSpecial>=30)
+        if (timeSpawnSpecial >= 20)
         {
             InvokeSpecial();
             timeSpawnSpecial = 0;

@@ -17,7 +17,7 @@ public class SpecialMedicine : MonoBehaviour {
        
         int random = Random.Range(1, 4);
        
-        iTween.MoveTo(this.gameObject, iTween.Hash("path", iTweenPath.GetPath("Path"+random.ToString()), "time", 10, "easytype", iTween.EaseType.easeInOutCirc));
+        iTween.MoveTo(this.gameObject, iTween.Hash("path", iTweenPath.GetPath("Path"+random.ToString()), "time", 20, "easytype", iTween.EaseType.linear));
     }
     private void Update()
     {

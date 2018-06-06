@@ -41,14 +41,17 @@ public class HandTrigger : MonoBehaviour
     public Game1Manager game1;
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.name);
         if (other.CompareTag("MedicineGameTag"))
         {
             CatchObject(other);
         }
         if (other.CompareTag("Special"))
         {
+            Debug.Log("đã lấy được nó rồi");
             GSPlaying.Instance.ShowScorePopup(other.transform.localPosition, 1);
             game1.AddLive();
+            Destroy(other.gameObject);
         }
     }
 
