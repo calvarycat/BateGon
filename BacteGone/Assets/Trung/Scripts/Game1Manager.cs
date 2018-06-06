@@ -55,6 +55,15 @@ public class Game1Manager : MonoBehaviour
         StartCoroutine(ShowSymptom());
         ResetLives(numberofLive);
     }
+    public void AddLive()
+    {
+        numberofLive++;
+        if(numberofLive>4)
+        {
+            numberofLive = 4;
+        }
+        ResetLives(numberofLive);
+    }
     public void ResetLives(int live)
     {
         for (int i = 0; i < RootLive.transform.childCount; i++)
@@ -152,14 +161,14 @@ public class Game1Manager : MonoBehaviour
         {
 
             AudioManager.PlaySound(clipslashRight);
-            score += 4;
+            score += 2;
             StartCoroutine(DisableSymptom(currentDisease, .1f));
             GSPlaying.Instance.PlayScreenEfect(true, 2);
-            GSPlaying.Instance.ChangeScore(4);
-            GSPlaying.Instance.ShowScorePopup(positionPopup.localPosition, 4);
+            GSPlaying.Instance.ChangeScore(2);
+            GSPlaying.Instance.ShowScorePopup(positionPopup.localPosition, 2);
             if (gs)
             {
-                gs.OnChangeScore(4);
+                gs.OnChangeScore(2);
             }
          
 

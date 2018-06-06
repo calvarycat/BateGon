@@ -23,6 +23,7 @@ public class CountDownPanel : MonoBehaviour
     private int _currentNumber;
     private LTDescr _titleCircleDescr;
     bool isSound;
+    public TexturedNumber CountDownTextImage;
     public void Init(Action callback = null, int round = 0, string message = "", bool isShowSound = true)
     {
         isSound = isShowSound;

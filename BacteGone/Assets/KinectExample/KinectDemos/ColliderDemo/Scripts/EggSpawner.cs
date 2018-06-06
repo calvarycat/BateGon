@@ -17,8 +17,10 @@ public class EggSpawner : MonoBehaviour
     float timechange = 10;
     float countTimeChange = 10;
     float speed = 1.5f;
+    public float timeSpawnSpecial;
     void OnEnable()
     {
+        timeSpawnSpecial = 0;
         speed = 1.5f;
         countTimeChange = 10;
         spawnRate = 1f;
@@ -41,6 +43,15 @@ public class EggSpawner : MonoBehaviour
        
         if (game1Manager.isCall)
             return;
+
+        timeSpawnSpecial += Time.deltaTime;
+
+        if(timeSpawnSpecial>=30)
+        {
+            InvokeSpecial();
+            timeSpawnSpecial = 0;
+        }
+
         if (nextEggTime < Time.time)
         {
             SpawnEgg();
@@ -54,12 +65,16 @@ public class EggSpawner : MonoBehaviour
             }
 
         }
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            InvokeSpecial();
+        }
 
     }
     public GameObject special;
     public void InvokeSpecial()
     {
-       
+       Instantiate(special, new Vector3(0, 10f, 0), Quaternion.identity);
     }
 
 

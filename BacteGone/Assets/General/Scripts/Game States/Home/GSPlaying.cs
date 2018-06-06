@@ -51,11 +51,12 @@ public class GSPlaying : GSTemplate
 
     private LTDescr _timeColorDescr;
     private bool _isShowHandTrail;
-    private RectTransform _leftTrailRectTransform;
-    private RectTransform _rightTrailRectTransform;
+    //private RectTransform _leftTrailRectTransform;
+    //private RectTransform _rightTrailRectTransform;
 
     private LTDescr _warningColorDescr;
 
+    public TexturedNumber ScoreTextureImage;
     protected override void Awake()
     {
         base.Awake();
@@ -66,13 +67,13 @@ public class GSPlaying : GSTemplate
     {
         base.Init();
 
-        _leftTrailRectTransform = LeftHandTrail.GetComponent<RectTransform>();
-        _rightTrailRectTransform = RightHandTrail.GetComponent<RectTransform>();
+        //_leftTrailRectTransform = LeftHandTrail.GetComponent<RectTransform>();
+        //_rightTrailRectTransform = RightHandTrail.GetComponent<RectTransform>();
     }
 
     public override void OnResume()
     {
-        Debug.Log("resume"); 
+       // Debug.Log("resume"); 
         base.OnResume();
 
         ResetScreenEffect();
@@ -227,7 +228,9 @@ public class GSPlaying : GSTemplate
 
     private void UpdateScoreText()
     {
-        ScoreText.text = string.Format("{0:000}", _currentTweenScore);
+        //ScoreText.text = string.Format("{0:000}", _currentTweenScore);
+     
+        ScoreTextureImage.Value = _currentTweenScore.ToString();
     }
 
     #endregion
@@ -338,11 +341,11 @@ public class GSPlaying : GSTemplate
 
     private void ResetHandTrail()
     {
-        _isShowHandTrail = false;
-        LeftHandTrail.enabled = false;
-        RightHandTrail.enabled = false;
-        _leftTrailRectTransform.anchoredPosition = Vector3.zero;
-        _rightTrailRectTransform.anchoredPosition = Vector3.zero;
+        //_isShowHandTrail = false;
+        //LeftHandTrail.enabled = false;
+        //RightHandTrail.enabled = false;
+        //_leftTrailRectTransform.anchoredPosition = Vector3.zero;
+        //_rightTrailRectTransform.anchoredPosition = Vector3.zero;
     }
 
     public void ShowHandTrail()
@@ -359,44 +362,44 @@ public class GSPlaying : GSTemplate
 
     private void UpdateHandTrail()
     {
-        if (!_isShowHandTrail)
-        {
-            return;
-        }
+        //if (!_isShowHandTrail)
+        //{
+        //    return;
+        //}
 
-        long userId = KinectManager.Instance.GetUserIdByIndex(0);
+        //long userId = KinectManager.Instance.GetUserIdByIndex(0);
 
-        KinectInterop.HandState leftHandState = KinectManager.Instance.GetLeftHandState(userId);
-        if (leftHandState != KinectInterop.HandState.NotTracked)
-        {
-            Vector3 handPosition = KinectManager.Instance.GetJointPosColorOverlay(userId,
-                (int)KinectInterop.JointType.HandLeft, Camera.main, KinectInputModule.Instance.TargetCanvas.pixelRect);
+        //KinectInterop.HandState leftHandState = KinectManager.Instance.GetLeftHandState(userId);
+        //if (leftHandState != KinectInterop.HandState.NotTracked)
+        //{
+        //    Vector3 handPosition = KinectManager.Instance.GetJointPosColorOverlay(userId,
+        //        (int)KinectInterop.JointType.HandLeft, Camera.main, KinectInputModule.Instance.TargetCanvas.pixelRect);
 
-            if (handPosition != Vector3.zero)
-            {
-                Vector3 screenPosition = Camera.main.WorldToScreenPoint(handPosition);
-                Vector3 canvasPosition = Utility.ConvertScreenPositionToCanvasPosition(
-                    KinectInputModule.Instance.TargetCanvas,
-                    screenPosition);
-                _leftTrailRectTransform.anchoredPosition = canvasPosition;
-            }
-        }
+        //    if (handPosition != Vector3.zero)
+        //    {
+        //        Vector3 screenPosition = Camera.main.WorldToScreenPoint(handPosition);
+        //        Vector3 canvasPosition = Utility.ConvertScreenPositionToCanvasPosition(
+        //            KinectInputModule.Instance.TargetCanvas,
+        //            screenPosition);
+        //        _leftTrailRectTransform.anchoredPosition = canvasPosition;
+        //    }
+        //}
 
-        KinectInterop.HandState rightHandState = KinectManager.Instance.GetRightHandState(userId);
-        if (rightHandState != KinectInterop.HandState.NotTracked)
-        {
-            Vector3 handPosition = KinectManager.Instance.GetJointPosColorOverlay(userId,
-                (int)KinectInterop.JointType.HandRight, Camera.main, KinectInputModule.Instance.TargetCanvas.pixelRect);
+        //KinectInterop.HandState rightHandState = KinectManager.Instance.GetRightHandState(userId);
+        //if (rightHandState != KinectInterop.HandState.NotTracked)
+        //{
+        //    Vector3 handPosition = KinectManager.Instance.GetJointPosColorOverlay(userId,
+        //        (int)KinectInterop.JointType.HandRight, Camera.main, KinectInputModule.Instance.TargetCanvas.pixelRect);
 
-            if (handPosition != Vector3.zero)
-            {
-                Vector3 screenPosition = Camera.main.WorldToScreenPoint(handPosition);
-                Vector3 canvasPosition = Utility.ConvertScreenPositionToCanvasPosition(
-                    KinectInputModule.Instance.TargetCanvas,
-                    screenPosition);
-                _rightTrailRectTransform.anchoredPosition = canvasPosition;
-            }
-        }
+        //    if (handPosition != Vector3.zero)
+        //    {
+        //        Vector3 screenPosition = Camera.main.WorldToScreenPoint(handPosition);
+        //        Vector3 canvasPosition = Utility.ConvertScreenPositionToCanvasPosition(
+        //            KinectInputModule.Instance.TargetCanvas,
+        //            screenPosition);
+        //        _rightTrailRectTransform.anchoredPosition = canvasPosition;
+        //    }
+        //}
     }
 
     #endregion
@@ -448,11 +451,11 @@ public class GSPlaying : GSTemplate
 
     #endregion
 
-    private void Update()
-    {
-        UpdateHandTrail();
-        CheckReset();
-    }
+    //private void Update()
+    //{
+    //    UpdateHandTrail();
+    //    CheckReset();
+    //}
 
     private void CheckReset()
     {

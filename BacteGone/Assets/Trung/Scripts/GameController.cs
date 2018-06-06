@@ -118,31 +118,7 @@ public class GameController : MonoBehaviour
     {
         score += _score;
     }
-    float CaculateScore(int score)
-    {
-        float result = 0;
-
-
-        if (score >= 150)
-            return 100;
-        if (score > 130)
-        {
-            float rs = ((score - 130) * 20) / 20;
-            result = 80 + rs;
-        }
-        if (score > 25)
-        {
-            float rs = ((score - 25) * 30) / 105;
-            result = 50 + rs;
-        }
-        else
-        {
-            float rs = (score * 50) / 25;
-            result = rs;
-        }
-        return result;
-    }
-
+   
 
     public void Update()
     {

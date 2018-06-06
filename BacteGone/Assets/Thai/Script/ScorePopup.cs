@@ -29,18 +29,24 @@ public class ScorePopup : MonoBehaviour
             screenPosition);
         _rectTransform.anchoredPosition = canvasPosition;
 
-        if (score >= 0)
+        if (score == 1)
         {
-            TargetText.text = "Perfect "+string.Format("+{0:00}", score);
-            TargetGradient.EffectGradient = RightGradient;
+            TargetText.text = " 1 plus ";
         }
         else
         {
-            // TargetText.text ="Opp "+ string.Format("{0:00}", score);
-            TargetText.text = "Opp!";
-            TargetGradient.EffectGradient = WrongGradient;
+            if (score >= 0)
+            {
+                TargetText.text = "Perfect " + string.Format("+{0:00}", score);
+                TargetGradient.EffectGradient = RightGradient;
+            }
+            else
+            {
+                // TargetText.text ="Opp "+ string.Format("{0:00}", score);
+                TargetText.text = "Opp!";
+                TargetGradient.EffectGradient = WrongGradient;
+            }
         }
-
         TargetText.color = FromColor;
         LeanTween.colorText(TargetText.rectTransform, ToColor, Time / 2.1f).setDelay(Time / 2.1f);
 

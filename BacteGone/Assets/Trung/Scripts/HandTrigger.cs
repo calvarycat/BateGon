@@ -13,9 +13,9 @@ public class HandTrigger : MonoBehaviour
  
      private SpriteRenderer _spriteRenderer;
     public GameController gs;
-    public Game2Manager game2;
-    public List<Sprite> listSpriteHoatchat;
-    public SpriteRenderer spriteHoatChat;
+  
+   // public List<Sprite> listSpriteHoatchat;
+   // public SpriteRenderer spriteHoatChat;
 
 
     void OnEnable()
@@ -34,17 +34,21 @@ public class HandTrigger : MonoBehaviour
 
 
     }
-    public void ChangeHoatChat(int id)
-    {
-        spriteHoatChat.sprite = listSpriteHoatchat[id];
-    }
+    //public void ChangeHoatChat(int id)
+    //{
+    //    spriteHoatChat.sprite = listSpriteHoatchat[id];
+    //}
+    public Game1Manager game1;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("MedicineGameTag"))
         {
-
-
             CatchObject(other);
+        }
+        if (other.CompareTag("Special"))
+        {
+            GSPlaying.Instance.ShowScorePopup(other.transform.localPosition, 1);
+            game1.AddLive();
         }
     }
 

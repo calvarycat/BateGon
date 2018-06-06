@@ -17,6 +17,7 @@ public class GSResult : GSTemplate
     public float TimeScale;
 
     public Text HappyValueText;
+    public TexturedNumber scoreResultTexture;
     public ButtonCTA BackButon;
 
     public float WaitTime;
@@ -52,7 +53,7 @@ public class GSResult : GSTemplate
         StopTweenValue();
         KinectInputModule.Instance.AllowUpdate = false;
         HappyValueText.text = "0";
-
+        scoreResultTexture.Value = "0";
         _beginWait = false;
         _currentWait = WaitTime;
 
@@ -123,6 +124,7 @@ public class GSResult : GSTemplate
     {
         int vl = (int)value;
         HappyValueText.text = vl.ToString();
+        scoreResultTexture.Value = vl.ToString();
     }
 
     private void OnShowHappyValueFinish()
