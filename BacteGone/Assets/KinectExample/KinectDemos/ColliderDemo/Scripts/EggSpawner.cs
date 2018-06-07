@@ -23,7 +23,7 @@ public class EggSpawner : MonoBehaviour
         timeSpawnSpecial = 0;
         speed = 1.5f;
         countTimeChange = 10;
-        spawnRate = 1f;
+        spawnRate = 2f;
     }
     void Update()
     {
@@ -71,10 +71,7 @@ public class EggSpawner : MonoBehaviour
             }
 
         }
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            InvokeSpecial();
-        }
+       
 
     }
     public GameObject special;
@@ -110,16 +107,24 @@ public class EggSpawner : MonoBehaviour
             Vector3 spawnPos = new Vector3(addXPos, 5f, posUser.z);
             Transform eggTransform = Instantiate(eggPrefab, spawnPos, Quaternion.identity) as Transform;
             int a = Random.Range(0, 5);
-          
-            if(!CheckListCurrent())
+            Debug.Log(a + "//" + CheckListCurrent());
+            count++;
+            if(count>=4)
             {
-                a = game1Manager.currentDisease;
+                if (!CheckListCurrent())
+                {
+                    a = game1Manager.currentDisease;
+                }
+                count = 0;
             }
+           
             eggTransform.GetComponent<MedicinTrigger>().Init(a, speed);         
             eggTransform.parent = transform;
         }
     }
-   
+
+    int count = 0;
+
     public int oldObject = 0;
     bool CheckListCurrent()
     {
